@@ -1,0 +1,97 @@
+import pygame
+import random
+
+pygame.init()
+
+#game constants 
+white = (255, 255, 255)
+black = (0, 0, 0)
+red = (255, 0, 0)
+green = (0, 255, 0)
+blue = (0, 0, 255)
+WIDTH = 800
+HEIGHT = 600
+
+#game variables
+score = 0
+player_x = 50
+player_y = 200
+y_change = 0
+gravity = 1
+x_change = 0
+obstacles = [300, 600, 800]
+obstacle_speed = 2
+active = False
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('Endless Runner')
+background = blue
+fps = 60
+timer = pygame.time.Clock()
+
+running = True
+while running:
+    timer.tick(fps)
+    screen.fill(background)
+    floor = pygame.draw.rect(screen, white, [0, 220, WIDTH, 5])
+    player = pygame.draw.rect(screen, green, [player_x, player_y, 20, 20])
+    obstacle0 =  pygame.draw.rect(screen, red, [obstacles[0], 200, 20, 20])
+    obstacle1 =  pygame.draw.rect(screen, red, [obstacles[1], 200, 20, 20])
+    obstacle2 =  pygame.draw.rect(screen, red, [obstacles[2], 200, 20, 20])
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            
+        #controls
+        if event.type == pygame.KEYDOWN and not active:
+            if event.key == pygame.K_SPACE:
+                obstacles = [300, 600, 800]
+                player_x = 50
+                active = True
+                score = 0
+                
+        if event.type == pygame.KEYDOWN and active:
+            if event.key == pygame.K_SPACE and y_change == 0:
+                y_change = 18
+            if event.key == pygame.K_RIGHT:
+                x_change = 2
+            if event.key == pygame.K_LEFT:
+                x_change = -2 
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_RIGHT:
+                x_change = 0
+            if event.key == pygame.K_LEFT:
+                x_change = 0
+    
+    for i in range(len(obstacles)):
+        if active:
+            obstacles[i] -= obstacle_speed
+            if obstacles[i] < -20:
+                obstacles[i] = random.randint(470, 870)
+                score += 1
+            if player.colliderect(obstacle0) or player.colliderect(obstacle1) or player.colliderect(obstacle2):
+                active = False
+    
+    
+    #boundaries            
+    if 0 <= player_x <= 780:
+        player_x += x_change
+    if player_x < 0:
+        player_x = 0
+    if player_x > 780:
+        player_x = 780
+    #gravity            
+    if y_change > 0 or player_y < 200:
+        player_y -= y_change
+        y_change -= gravity
+    if player_y > 200:
+        player_y = 200
+    if player_y == 200 and y_change < 0:
+        y_change = 0
+        
+        
+                
+    pygame.display.flip()
+    
+pygame.quit()    

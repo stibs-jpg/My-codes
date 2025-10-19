@@ -7,7 +7,12 @@ pygame.init()
 
 # Constants
 WIDTH, HEIGHT = 800, 600
-WHITE, BLACK, RED, GREEN, BLUE, BROWN = (255, 255, 255), (0, 0, 0), (255, 0, 0), (0, 255, 0), (0, 0, 255), (160, 82, 45)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+BROWN = (160, 82, 45)
 PLAYER_SIZE = 20
 FLOOR_Y = 500
 GRAVITY = 1
@@ -17,11 +22,12 @@ FPS = 60
 SPRITE_WIDTH, SPRITE_HEIGHT = 48, 48
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 IMAGES_DIR = os.path.join(BASE_DIR, "images")
-OBSTACLE_SIZE = (40, 40)            
+OBSTACLE_SIZE = (40, 40)
 OBSTACLE_FILENAMES = ["spike.png"]
 OBSTACLE_SURFS = []
-SPEED_INCREASE = 0.2 #Speed increase per score 
-MAX_SPEED = 50 #Maximum speed, nakalagay nanga eh
+SPEED_INCREASE = 0.2  # Speed increase per score
+MAX_SPEED = 50  # Maximum speed
+INVINCIBILITY_DURATION = 3000  # milliseconds
 
 
 # Setup
@@ -29,7 +35,38 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Endless Runner")
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 36)
-background_image = pygame.image.load("images/background.png").convert()
+
+# load background
+background_image = pygame.image.load(os.path.join(IMAGES_DIR, "background.png")).convert()
+
+# Player Sprite
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.images = []
+        # load player frames
+        for i in range(1, 4):
+            img_path = os.path.join(IMAGES_DIR, 'player' + str(i) + '.png')
+            img = pygame.image.load(img_path).convert_alpha()
+            img = pygame.transform.smoothscale(img, (SPRITE_WIDTH, SPRITE_HEIGHT))
+            self.images.append(img)
+        self.image = self.images[0]
+        self.rect = self.image.get_rect()
+
+# PowerUp Sprite
+class PowerUp(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = pygame.Surface((30, 30), pygame.SRCALPHA)
+        # draw a simple gold circle so it looks nicer than a plain rect
+        pygame.draw.circle(self.image, (255, 215, 0), (15, 15), 15)
+        self.rect = self.image.get_rect(center=(x, y))
+        self.speed = 5
+
+    def update(self):
+        self.rect.x -= self.speed
+        if self.rect.right < 0:
+            self.kill()
 
 # Game variables
 score = 0
@@ -39,45 +76,48 @@ active = False
 y_velocity = 0
 x_velocity = 0
 
-# Obstacles
-obstacles = [pygame.Rect(x, FLOOR_Y - 20, 20, 20) for x in [300, 600, 800]]
-
-#Player Sprite
-class Player(pygame.sprite.Sprite):
-    #Spawn a player
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.images = []
-        for i in range(1, 4):
-            img = pygame.image.load(os.path.join('images', 'player' + str(i) + '.png')).convert_alpha()
-            img = pygame.transform.smoothscale(img, (SPRITE_WIDTH, SPRITE_HEIGHT))
-            self.images.append(img)
-            self.image = self.images[0]
-            self.rect = self.image.get_rect()
-        
-#Initialize player and sprite group
 player = Player()
 player.rect.x = 50
-player.rect.y = 452
-player_list = pygame.sprite.Group()
-player_list.add(player)
+player.rect.bottom = FLOOR_Y
+player_group = pygame.sprite.Group(player)
+
+# Obstacles (list of rects)
+obstacles = [pygame.Rect(x, FLOOR_Y - 20, 20, 20) for x in [300, 600, 900]]
+
+# Powerups group (must be defined before using)
+powerups = pygame.sprite.Group()
+
+# Invincibility variables
+invincible = False
+invincible_timer = 0
 
 def reset_game():
-    global player, obstacles, score, active, y_velocity, x_velocity
+    global player, obstacles, score, active, y_velocity, x_velocity, invincible
     player.rect.x = 50
-    player.rect.y = FLOOR_Y - PLAYER_SIZE
+    player.rect.bottom = FLOOR_Y
     y_velocity = 0
     x_velocity = 0
-    obstacles[:] = [pygame.Rect(x, FLOOR_Y - 20, 20, 20) for x in [300, 600, 800]]
+    obstacles[:] = [pygame.Rect(x, FLOOR_Y - 20, 20, 20) for x in [300, 600, 900]]
     score = 0
     active = True
+    invincible = False
 
 def draw():
+    # Draw everything to the screen
     screen.blit(background_image, (0, 0))
-    pygame.draw.rect(screen, BROWN, [0, FLOOR_Y, WIDTH, 100])
-    player_list.draw(screen)
+    pygame.draw.rect(screen, BROWN, [0, FLOOR_Y, WIDTH, HEIGHT - FLOOR_Y])
+    # Draw obstacles
     for obs in obstacles:
         pygame.draw.rect(screen, RED, obs)
+    # Draw powerups
+    powerups.draw(screen)
+    # Draw player
+    player_group.draw(screen)
+    # If invincible, draw an outline around player for feedback
+    if invincible:
+        outline_rect = player.rect.inflate(8, 8)
+        pygame.draw.rect(screen, (255, 255, 0), outline_rect, 3)
+    # Draw score
     score_text = font.render(f"Score: {score}", True, WHITE)
     screen.blit(score_text, (10, 10))
     pygame.display.flip()
@@ -89,21 +129,18 @@ def handle_input(event):
             reset_game()
         elif active:
             if event.key == pygame.K_SPACE and player.rect.bottom >= FLOOR_Y:
+                # jump
                 y_velocity = -JUMP_STRENGTH
-            elif event.key == pygame.K_RIGHT:
+            elif event.key in (pygame.K_RIGHT, pygame.K_d):
                 x_velocity = 2
-            elif event.key == pygame.K_d:
-                x_velocity = 2
-            elif event.key == pygame.K_LEFT:
-                x_velocity = -2
-            elif event.key == pygame.K_a:
+            elif event.key in (pygame.K_LEFT, pygame.K_a):
                 x_velocity = -2
     elif event.type == pygame.KEYUP:
-        if event.key in [pygame.K_RIGHT, pygame.K_LEFT,pygame.K_d, pygame.K_a]:
+        if event.key in [pygame.K_RIGHT, pygame.K_LEFT, pygame.K_d, pygame.K_a]:
             x_velocity = 0
 
 def update_game():
-    global y_velocity, score, active 
+    global y_velocity, score, active, invincible, invincible_timer
 
     # Apply gravity
     if player.rect.bottom < FLOOR_Y or y_velocity < 0:
@@ -113,21 +150,42 @@ def update_game():
         player.rect.bottom = FLOOR_Y
         y_velocity = 0
 
-    
-
     # Move player
     player.rect.x += x_velocity
-    player.rect.x = max(0, min(WIDTH - PLAYER_SIZE, player.rect.x))
+    player.rect.x = max(0, min(WIDTH - player.rect.width, player.rect.x))
 
     # Move obstacles
     for obs in obstacles:
-        current_speed = OBSTACLE_SPEED + (score * SPEED_INCREASE)
+        current_speed = min(MAX_SPEED, OBSTACLE_SPEED + (score * SPEED_INCREASE))
         obs.x -= current_speed
         if obs.right < 0:
-            obs.x = random.randint(WIDTH + 50, WIDTH + 250)
+            obs.x = random.randint(WIDTH + 50, WIDTH + 400)
             score += 1
+
+        # Collision with obstacles
         if player.rect.colliderect(obs):
-            active = False
+            if not invincible:
+                active = False
+            else:
+                obs.x = random.randint(WIDTH + 50, WIDTH + 400)
+                score += 1
+
+    # Spawn power-up randomly (Change if want nyo)
+    if random.random() < 0.9 and len(powerups) < 2:
+        y_pos = random.randint(50, FLOOR_Y -50)
+        p = PowerUp(WIDTH + 30, y_pos)
+        powerups.add(p)
+
+    powerups.update()
+
+    # Check if player picks up a power-up
+    hits = pygame.sprite.spritecollide(player, powerups, True)
+    if hits:
+        invincible = True
+        invincible_timer = pygame.time.get_ticks()
+
+    if invincible and (pygame.time.get_ticks() - invincible_timer > INVINCIBILITY_DURATION):
+        invincible = False
 
 # Main loop
 running = True
@@ -136,11 +194,12 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        handle_input(event)
+        else:
+            handle_input(event)
 
     if active:
-        
         update_game()
+
     draw()
 
 pygame.quit()

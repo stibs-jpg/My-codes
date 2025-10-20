@@ -1,56 +1,42 @@
-.header {
-  font-size: 35px;
-  color: white;
-  background-color: green;
-  text-align: center;
-  height: 150px;
-  padding-bottom: 70px;
-  padding-top: 10px;
-  margin: 0px;
-}
-.header h1 {
-  margin-bottom: 0px;
-}
-.header p {
-  margin-top: 0px;
-}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.gallery {
-  font-size: 35px;
-  color: black;
-  background-color: white;
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  line-height: 1.8;
+}
+
+/* Header */
+.header {
   text-align: center;
-}
-.about {
-  font-size: 35px;
-  color: black;
-  background-color: white;
-  text-align: justify;
-  margin: 100px;
-  line-height: 55px;
+  background: linear-gradient(135deg, #007E33, #004d1a);
+  color: white;
+  padding: 60px 20px;
 }
 
-.experience {
-  font-size: 35px;
-  color: black;
-  background-color: white;
-  text-align: justify;
-  margin: 100px;
-  line-height: 55px;
+.header h1 {
+  font-size: 3rem;
+  letter-spacing: 1px;
 }
 
+.header p {
+  font-size: 1.3rem;
+  margin-top: 10px;
+}
+
+/* Navbar */
 .nav_bar {
   background-color: #E3EFE9;
-  color: grey;
-  font-size: 35px;
-  text-align: center;
-  height: 70px;
-  line-height: 50px;
-  padding-top: 20px;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav_bar nav {
@@ -59,62 +45,160 @@
   gap: 40px;
 }
 
-#about {
-  color: slategray;
+.nav_bar a {
+  color: #007E33;
   text-decoration: none;
-}
-#experience {
-  color: slategray;
-  text-decoration: none;
-}
-.slideshow-gallery {
-	max-width: 1000px;
-	position: relative;
-	margin: auto;
-	background-color: black;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
-.mySlides {
-	display: none;
+.nav_bar a:hover {
+  color: #FFC300;
+  border-bottom: 2px solid #FFC300;
+}
+
+/* Sections */
+.section {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.section h2 {
+  text-align: center;
+  color: #007E33;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.section p {
+  text-align: justify;
+  font-size: 1.1rem;
+}
+
+/* Gallery */
+.slideshow-gallery {
+  max-width: 800px;
+  position: relative;
+  margin: 40px auto;
+  background-color: black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.slideshow-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 
 .prev, .next {
-	cursor: pointer;
-	position: absolute;
-	top: 50%;
-	width: auto;
-	margin-top: -22px;
-	padding: 16px;
-	color: white;
-	font-weight: bold;
-	font-size: 18px;
-	transition: 0.6s ease;
-	border-radius: 0 3px 3px 0;
-	user-select: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
 }
 
-/* Position the "prev button" to the left */
-.prev {
-	left: 0;
-	border-radius: 3px 0 0 3px;
-}
-
-/* Position the "next button" to the right */
-.next {
-	right: 0;
-	border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-	background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.7);
 }
 
-.mySlides {
-	display: none;
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.text {
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  background: rgba(0,0,0,0.4);
+}
+
+.numberText {
+  color: #ccc;
+  font-size: 0.9rem;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+/* Dots */
+.dots {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 4px;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot.active, .dot:hover {
+  background-color: #007E33;
+}
+
+/* Paa */
+.footer {
+  background-color: #007E33;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .fade {
-	animation-name: fade;
-	animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* Response */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .nav_bar nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section {
+    margin: 50px 10px;
+  }
 }

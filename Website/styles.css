@@ -4,8 +4,11 @@ header {
     color: white;
     font-size: 30px;
     height: 180px;
-    line-height: 25px;
+    line-height: 27px;
+    transform: translateY(-30px);
+    animation: popup 0.5s ease-out forwards;
 }
+
 header h1 {
     padding-top: 50px;
     font-size: 60px;
@@ -16,6 +19,23 @@ header p {
     margin: 30px; 
     letter-spacing: 1px;
 }
+footer {
+    padding-top: 10px;
+    text-align: center;
+    background-color: green;
+    color: white;
+    font-size: 17px;
+    height: 50px;
+    line-height: 27px;
+    transform: translateY(-30px);
+    animation: popup 0.5s ease-out forwards;
+}
+.About_section, .Experience_section, .Gallery_section{
+    animation-name: fadeInSlideUp;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
 .nav_bar {
     background-color: #E3EFE9;
     display: flex;
@@ -23,6 +43,11 @@ header p {
     align-items: center; 
     gap: 30px; 
     height: 90px; 
+    transform: translateY(-30px);
+    animation: popup 0.5s ease-out forwards;
+    position: sticky;
+    z-index: 1;
+    top: 0;
 }
 
 .nav_bar a {
@@ -32,9 +57,13 @@ header p {
     padding: 10px 20px; 
     background: none; 
     text-align: center;
+    float: left;
+    display: block;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-out;
 }
 .nav_bar a:hover{
     color: yellow;
+    transform: scale(1.1);
 }
 .About_section h1 {
     padding-top: 80px;
@@ -45,7 +74,7 @@ header p {
     margin-left: 300px;
     margin-right: 300px;
 }
-.About_section p {
+.About_section p, .Experience_section p {
     text-align: justify;
     background-color: white;
     color: black;
@@ -53,6 +82,7 @@ header p {
     margin-left: 370px;
     margin-right: 370px;
     line-height: 200%;
+    word-spacing: 13px;
 }
 .Experience_section h1 {
     margin-top: 120px;
@@ -62,15 +92,6 @@ header p {
     font-size: 35px;
     margin-left: 300px;
     margin-right: 300px;
-}
-.Experience_section p {
-    text-align: justify;
-    background-color: white;
-    color: black;
-    font-size: 23px;
-    margin-left: 370px;
-    margin-right: 370px;
-    line-height: 200%;
 }
 
 .Gallery_section  {
@@ -89,7 +110,9 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     box-sizing:border-box
 }
-
+html {
+    scroll-behavior: smooth;
+}
 .slideshow-gallery {
 	max-width: 1000px;
 	position: relative;
@@ -178,4 +201,21 @@ body {
 @keyframes fade {
 	from {opacity: .4}
 	to {opacity: 1}
+}
+@keyframes popup {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }    
+}
+
+@keyframes fadeInSlideUp {
+    0%{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

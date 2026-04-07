@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+@font-face {
+    font-family: "Dunbar Low";
+    src: url(Fonts/dunbar-low-regular.ttf);
+}
+@font-face {
+    font-family: "Futura PT";
+    src: url(Fonts/Futura\ PT\ Heavy.ttf);
+}
+
+body {  
+    background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url(Images/Barangay\ Wallpaper.png);
+    background-size: cover;
+    background-position: center;
+}
+
+/* HEADER */
+header {
+    background: #2e7d32;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    padding-top: 10px;
+    padding-left: 70px;
+    font-family: "Dunbar Low";
+}
+header h1 {
+    font-family: "Dunbar Low";
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+.logo-text{
+    font-size: 12px;
+}
+nav {
+    display: flex;
+    align-items: center;
+}
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: "IBM Plex Sans";
+    font-weight: 300;
+    transition: transform 0.3s ease-out;
+}
+nav a.active {
+    border-bottom: 2px solid white;
+    padding-bottom: 3px;
+}
+nav a:hover {
+    transform: scale(1.10);
+}
+
+button {
+    padding: 15px 30px;
+    border: none;
+    background: white;
+    color: #2e7d32;
+    cursor: pointer;
+    border-radius: 999px;
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo-text span {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.logo-text small {
+    font-size: 12px;
+}
+
+/* LAYOUT */
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 0px;
+    gap: 40px;
+}
+
+/* PANELS */
+.left-panel {
+    background: #e8f5e9;
+    padding: 20px;
+    border-radius: 0;
+    font-size: 19px;
+}
+
+.center-panel {
+    text-align: center;
+}
+.center-panel h1 {
+    font-family: "Dunbar Low";
+    letter-spacing: 1px;
+    text-shadow: 0.3px 0 currentColor, 0 0.3px currentColor, 0.3px 0.3px currentColor
+}
+.center-panel h3 {
+    font-family: "Futura PT";
+    text-align: center;
+    font-size: 30px;
+    text-shadow: 0.3px 0 currentColor, 0 0.3px currentColor, 0.3px 0.3px currentColor
+}
+
+.right-panel .box {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+.right-panel ul {
+    list-style: none;  
+    padding: 0;
+    margin-bottom: 10px;   
+}
+
+/* BUTTON */
+.primary-btn {
+    margin-top: 30px;
+    padding: 15px 20px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 999px;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+.card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 30px;
+    width: 200px;
+    font-size: 17px;
+    font-family: "Dunbar Low";
+}
+
+.card button {
+    margin-top: 10px;
+    padding: 13px 20px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 999px;
+}
+.how-it-works-card {
+    background: white;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 15px; /* rounded corners */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* shadow = card effect */
+}
+
+
+/* STEPS */
+.steps-title {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.steps {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    font-weight: bold;
+}
+.steps img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+.arrow {
+    font-size: 70px;
+    align-self: center;
+}
+
+/* FOOTER */
+footer {
+    background: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}

@@ -24,3 +24,4 @@ document.getElementById("cedulaForm").addEventListener("submit", function(e) {
     alert("Application submitted successfully!");
     this.reset();
 });
+

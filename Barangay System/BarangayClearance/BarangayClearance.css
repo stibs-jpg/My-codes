@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url(BarangayWallpaper.png);
+     background-size: cover;
+    background-position: center;
+}
+
+/* HEADER */
+header {
+    background: #1f7a2e;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+}
+
+.logo-title img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+    padding: 20px;
+}
+
+/* LEFT */
+.left {
+    background-color: #e8f5e9;
+    width: 25%;
+    font-size: 19px;
+    padding: 10px;
+}
+
+/* FORM */
+.form-container {
+    width: 50%;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.form-container h2 {
+    text-align: center;
+}
+
+.form-container span {
+    font-size: 16px;
+}
+
+/* INPUTS */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* ROW */
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row div {
+    flex: 1;
+}
+
+/* BUTTON */
+.btn {
+    margin-top: 15px;
+    width: 120px;
+    padding: 10px;
+    border: none;
+    background: #1f7a2e;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn:hover {
+    background: #155d22;
+}
+
+/* RIGHT */
+.right {
+    background-color: #e8f5e9;
+    width: 25%;
+    padding: 10px;
+}
+
+.right ul {
+    padding-left: 20px;
+}
+
+/* FOOTER */
+footer {
+    background: #1f7a2e;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}

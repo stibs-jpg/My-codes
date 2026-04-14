@@ -9,8 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "document_request")
-public class DocumentRequest {
+@Table(name = "barangay_id_request")
+public class BarangayID {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

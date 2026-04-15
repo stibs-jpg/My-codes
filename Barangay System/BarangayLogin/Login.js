@@ -35,7 +35,7 @@ async function login(event) {
         } else if (data.role === "SECRETARY") {
             window.location.href = "/secretary/dashboard.html";
         } else {
-            window.location.href = "/Homepage/Prac.html";
+            window.location.href = "/Barangay System/HomePage/Prac.html";
         }
 
     } catch (error) {

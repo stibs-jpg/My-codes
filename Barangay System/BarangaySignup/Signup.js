@@ -24,5 +24,5 @@ async function signup(event) {
 
     const data = await response.json();
     alert("Signup successful!");
-    window.location.href = "/BarangayLogin/Login.html";
+    window.location.href = "/Barangay System/BarangayLogin/Login.html";
 }

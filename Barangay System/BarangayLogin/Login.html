@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay San Isidro Login</title>
+    <link rel="stylesheet" href="Login.css">
+
+    <script src="Login.js"></script>
+</head>
+<body>
+
+    <header class="top-banner">
+        <div class="header-content">
+            <img src="/HomePage/Images/roosevelt logo practice.png" alt="Barangay Logo" class="mini-logo">
+            <div class="header-text">
+                <span class="title">BARANGAY SAN ISIDRO</span>
+                <span class="subtitle">ONLINE APPLICATIONS</span>
+            </div>
+        </div>
+        <div class="signup">
+        <a href="/BarangaySignup/Signup.html" class="signup-link">Sign Up</a>
+    </div>
+    </header>
+
+    <main class="container">
+        <section class="left-pane">
+            <div class="logo-wrapper">
+                <img src="/HomePage/Images/roosevelt logo practice.png" alt="FEU Roosevelt" class="main-logo">
+            </div>
+        </section>
+
+        <section class="right-pane">
+            <div class="login-card">
+                <h3>Login</h3>
+                <form onsubmit="login(event)">
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" id="email" required>
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" required>
+    </div>
+
+    <div class="captcha-container">
+        <div class="captcha-box">
+            <input type="checkbox" id="robot">
+            <label for="robot">I'm not a robot</label>
+        </div>
+    </div>
+
+    <button type="submit" class="login-btn">Login</button>
+</form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-banner">
+        <div class="footer-left">
+            <span>© 2026 Barangay San Isidro, Marikina City | Powered by FEU Roosevelt IT Students</span>
+        </div>
+        <div class="footer-icons">
+            <i class="icon-facebook"></i>
+            <i class="icon-email"></i>
+            <i class="icon-phone"></i>
+            <i class="icon-whatsapp"></i>
+        </div>
+    </footer>
+
+</body>
+</html>

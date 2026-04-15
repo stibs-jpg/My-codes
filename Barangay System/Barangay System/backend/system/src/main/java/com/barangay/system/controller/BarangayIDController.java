@@ -3,6 +3,7 @@ package com.barangay.system.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,37 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barangay.system.model.BarangayID;
-import com.barangay.system.service.BarangayIDService;
-
+import com.barangay.system.repository.BarangayIDRepository;
 @RestController
 @RequestMapping("/api/documents")
 @CrossOrigin(origins = "*")
 public class BarangayIDController {
 
-    private final BarangayIDService barangayIDService;
+    @Autowired
+    private BarangayIDRepository repo;
 
-    // Constructor injection
-    public BarangayIDController(BarangayIDService barangayIDService) {
-        this.barangayIDService = barangayIDService;
-    }
-
-    // TEST ENDPOINT
+    // TEST ENDPOINT (very important)
     @GetMapping("/test")
     public String test() {
         return "Controller is working";
     }
 
-    // SUBMIT REQUEST
     @PostMapping("/submit")
     public BarangayID submit(@RequestBody BarangayID request) {
         request.setStatus("PENDING");
         request.setSubmittedAt(LocalDateTime.now());
-        return barangayIDService.saveBarangayID(request);
+        return repo.save(request);
     }
 
-    // GET ALL REQUESTS
     @GetMapping("/all")
     public List<BarangayID> getAll() {
-        return barangayIDService.getAllBarangayIDs();
+        return repo.findAll();
     }
 }

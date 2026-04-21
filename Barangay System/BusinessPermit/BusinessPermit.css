@@ -8,6 +8,19 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #f4f4f4;
+
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .navbar {
@@ -50,10 +63,31 @@ nav a {
     text-decoration: none;
     font-size: 0.8rem;
     font-weight: bold;
+    position: relative;
+    transition: color 0.3s ease;
 }
 
 nav a.active {
     border-bottom: 2px solid white;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    color: #c8e6c9;
 }
 
 .container {
@@ -72,6 +106,14 @@ nav a.active {
     padding: 15px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
+}
+.sidebar, .right-sidebar, .form-content {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar:hover, .right-sidebar:hover, .form-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .checkbox-group label {
@@ -127,6 +169,17 @@ input[type="text"], input[type="email"], textarea {
     border-radius: 10px;
     box-sizing: border-box;
 }
+input, textarea {
+    transition: all 0.25s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 5px rgba(27, 94, 32, 0.3);
+    transform: scale(1.02);
+}
+
 
 .name-inputs, .address-inputs {
     display: flex;
@@ -142,7 +195,20 @@ input[type="text"], input[type="email"], textarea {
     border-radius: 20px;
     font-size: 1.1rem;
     cursor: pointer;
+
+    transition: all 0.3s ease;
 }
+
+.apply-btn:hover {
+    background-color: #2e7d32;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.apply-btn:active {
+    transform: scale(0.97);
+}
+
 
 .capital-box textarea {
     height: 300px;

@@ -11,17 +11,16 @@
 <!-- HEADER -->
 <header>
     <div class="logo-title">
-        <img src="/Barangay System/HomePage/Images/roosevelt logo practice.png" alt="Logo">
-        <h2>BARANGAY SAN ISIDRO<br>REPORTS & COMPLAINTS</h2>
+        <img src="/Barangay System/HomePage/Images/LOGO.png" alt="Logo">
+        <h2>E-BARANGAY WEB PLATFORM<br>REPORTS & COMPLAINTS</h2>
     </div>
 
     <nav>
         <a href="../HomePage/Prac.html">HOME</a>
         <a href="#">APPLICATIONS</a>
-        <a href="#">REQUEST STATUS</a>
-        <a href="#">ANNOUNCEMENTS</a>
-        <a href="#">CONTACT</a>
-        <a href="#">LOGIN</a>
+        <a href="../Homepage/StatusRequest/Status.html">REQUEST STATUS</a>
+        <a href="../Announcement/Announcement.html">ANNOUNCEMENTS</a>
+        <a href="../BarangayLogin/Login.html">LOGOUT</a>
     </nav>
 </header>
 
@@ -42,23 +41,26 @@
 
         <form id="reportForm">
 
-            <label>TYPE OF INCIDENT</label>
-            <input type="text" required>
+    <label>TYPE OF INCIDENT</label>
+    <input type="text" id="incidentType" required>
 
-            <label>INCLUSIVE DATES AND TIME OF INCIDENT</label>
-            <input type="text" required>
+    <label>INCLUSIVE DATES AND TIME OF INCIDENT</label>
+    <input type="datetime-local" id="incidentStart" required>
 
-            <label>EXACT LOCATION OF INCIDENT</label>
-            <input type="text" required>
+    <label>END DATE & TIME (Optional)</label>
+    <input type="datetime-local" id="incidentEnd">
 
-            <label>INVOLVED PERSONS / SPECIFIC IDENTIFICATION</label>
-            <input type="text" required>
+    <label>EXACT LOCATION OF INCIDENT</label>
+    <input type="text" id="location" required>
 
-            <label>NARRATIVE DETAILS OF INCIDENT</label>
-            <textarea rows="4" required></textarea>
+    <label>INVOLVED PERSONS / SPECIFIC IDENTIFICATION</label>
+    <input type="text" id="involvedPersons" required>
 
-            <button type="submit">Report</button>
-        </form>
+    <label>NARRATIVE DETAILS OF INCIDENT</label>
+    <textarea id="narrative" rows="4" required></textarea>
+
+    <button type="submit">Report</button>
+</form>
     </div>
 
     <!-- RIGHT SIDE -->

@@ -25,15 +25,19 @@ async function login(event) {
         console.log("LOGIN SUCCESS:", data);
 
         // SAVE LOGIN DATA (optional but useful)
-        localStorage.setItem("user", JSON.stringify(data));
+        localStorage.setItem("user", JSON.stringify({
+        userId: data.userId,
+        email: data.email,
+        role: data.role
+        }));
 
         // ROLE-BASED REDIRECT
         if (data.role === "ADMIN") {
-            window.location.href = "/admin/dashboard.html";
+            window.location.href = "/Barangay System/Staffs/Staff.html";
         } else if (data.role === "CAPTAIN") {
-            window.location.href = "/captain/dashboard.html";
+            window.location.href = "/Barangay System/HomePage/Prac.html";
         } else if (data.role === "SECRETARY") {
-            window.location.href = "/secretary/dashboard.html";
+            window.location.href = "/Barangay System/HomePage/Prac.html";
         } else {
             window.location.href = "/Barangay System/HomePage/Prac.html";
         }

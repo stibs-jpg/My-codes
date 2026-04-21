@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Barangay Admin</title>
+  <link rel="stylesheet" href="Staff.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+  <div class="logo">
+    <img src="/Barangay System/HomePage/Images/roosevelt logo practice.png">
+    <div>
+      <h2>BARANGAY SAN ISIDRO</h2>
+      <p>STAFF / ADMIN</p>
+    </div>
+  </div>
+
+  <div class="nav-links">
+    <a href="#"class = "active">Homepage</a>
+    <a href="/Barangay System/Announcement/CreateAnnouncement.html">Publish Announcement</a>
+    <a href="/Barangay System/BarangayLogin/Login.html">Logout</a>
+  </div>
+</div>
+
+  <div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="menu active" data-page="id">Barangay ID</div>
+      <div class="menu" data-page="cedula">Cedula</div>
+      <div class="menu" data-page="complaints">Complaints</div>
+      <div class="menu" data-page="business">Business Permit</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h2 id="title">Barangay ID Requests</h2>
+      <div id="requestList"></div>
+    </div>
+
+  </div>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-box">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Barangay San Isidro
+  </footer>
+
+  <script src="Staff.js"></script>
+</body>
+</html>

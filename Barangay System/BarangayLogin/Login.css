@@ -9,14 +9,36 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+
+    opacity: 0;
+    animation: pageFade 0.5s ease forwards;
 }
 
-.top-banner, .footer-banner {
+@keyframes pageFade {
+    to {
+        opacity: 1;
+    }
+}
+
+.top-banner {
     background-color: #38761d;
     color: white;
     padding: 10px 20px;
     display: flex;
-    align-items: center;    
+    align-items: center;
+
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .header-content {
@@ -36,8 +58,8 @@ body {
     font-size: 0.9rem;
 }
 
-.signup {
-    margin-left: auto;
+.signup { 
+    margin-left: auto; 
 }
 
 .signup-link {
@@ -45,17 +67,27 @@ body {
     text-decoration: none;
     font-weight: bold;
     font-size: 0.95rem;
+    padding-left: 400px;
+    transition: all 0.2s ease;
 }
 
 .signup-link:hover {
     text-decoration: underline;
+    transform: translateY(-2px);
+}
+
+.signup-link:active {
+    transform: scale(0.97);
 }
 
 .mini-logo {
     height: 35px;
     filter: brightness(1.2);
 }
-
+.main-logo {
+    max-width: 75%;
+    max-height: 75%;
+}
 .container {
     flex: 1;
     display: flex;
@@ -67,6 +99,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    animation: slideLeft 0.6s ease;
 }
 
 .right-pane {
@@ -75,6 +109,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    animation: slideRight 0.6s ease;
+}
+
+@keyframes slideLeft {
+    from {
+        transform: translateX(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .login-card {
@@ -84,12 +142,17 @@ body {
     border-radius: 25px;
     border: 1px solid #999;
     box-shadow: 2px 4px 10px rgba(0,0,0,0.1);
+
+    opacity: 0;
+    transform: scale(0.85);
+    animation: popIn 0.5s ease forwards;
 }
 
-.login-card h3 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 25px;
+@keyframes popIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .form-group {
@@ -108,6 +171,15 @@ body {
     background-color: #eeeeee;
     border: 1px solid #ccc;
     border-radius: 4px;
+
+    transition: all 0.25s ease;
+}
+
+.form-group input:focus {
+    border-color: #38761d;
+    box-shadow: 0 0 6px rgba(56,118,29,0.4);
+    outline: none;
+    background: #fff;
 }
 
 .captcha-container {
@@ -134,11 +206,33 @@ body {
     font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
+
+    transition: all 0.25s ease;
+}
+
+.login-btn:hover {
+    background-color: #2d5e17;
+    transform: translateY(-2px);
+}
+
+.login-btn:active {
+    transform: scale(0.97);
 }
 
 .footer-banner {
     justify-content: space-between;
     font-size: 0.85rem;
+
+    animation: footerFade 0.6s ease;
+}
+
+@keyframes footerFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .footer-left {

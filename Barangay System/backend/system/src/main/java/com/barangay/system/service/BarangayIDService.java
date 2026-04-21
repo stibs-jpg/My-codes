@@ -20,6 +20,14 @@ public class BarangayIDService {
         return barangayIDRepository.save(barangayID);
     }
 
+    public List<BarangayID> getByUserId(Long userId) {
+    return barangayIDRepository.findByUserId(userId);
+}
+
+    public BarangayID getById(Long id) {
+    return barangayIDRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Request not found with id: " + id));
+}
     public List<BarangayID> getAllBarangayIDs() {
         return barangayIDRepository.findAll();
     }

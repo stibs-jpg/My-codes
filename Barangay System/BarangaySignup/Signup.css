@@ -9,6 +9,17 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+
+    opacity: 0;
+    transform: scale(0.98);
+    animation: pageIn 0.5s ease forwards;
+}
+
+@keyframes pageIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .navbar {
@@ -19,6 +30,19 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 3px solid #6A1B9A;
+
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .header-content {
@@ -46,8 +70,14 @@ body {
     text-decoration: none;
     font-weight: bold;
     font-size: 0.8rem;
+
+    transition: all 0.2s ease;
 }
 
+.login-link:hover {
+    text-decoration: underline;
+    transform: scale(1.05);
+}
 .split-container {
     flex: 1;
     display: flex;
@@ -59,6 +89,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    animation: slideLeft 0.6s ease;
 }
 
 .form-section {
@@ -67,6 +99,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    animation: slideRight 0.6s ease;
+}
+
+@keyframes slideLeft {
+    from {
+        transform: translateX(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .form-card {
@@ -77,6 +133,17 @@ body {
     width: 450px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+    opacity: 0;
+    transform: scale(0.85);
+    animation: popIn 0.5s ease forwards;
+}
+
+@keyframes popIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .form-card h2 {
@@ -100,6 +167,14 @@ body {
     padding: 10px;
     border: 1px solid #999;
     border-radius: 5px;
+
+    transition: all 0.25s ease;
+}
+
+.input-group input:focus {
+    border-color: #2E7D32;
+    box-shadow: 0 0 6px rgba(46,125,50,0.4);
+    outline: none;
 }
 
 .password-strength {
@@ -138,6 +213,17 @@ body {
     cursor: pointer;
     width: 60%;
     margin-bottom: 15px;
+
+    transition: all 0.25s ease;
+}
+
+.btn-create:hover {
+    background-color: #1f5a22;
+    transform: translateY(-2px);
+}
+
+.btn-create:active {
+    transform: scale(0.97);
 }
 
 .social-login {
@@ -172,6 +258,17 @@ footer {
     display: flex;
     justify-content: space-between;
     font-size: 0.8rem;
+
+    animation: fadeFooter 0.6s ease;
+}
+
+@keyframes fadeFooter {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .footer-right i {
@@ -180,8 +277,8 @@ footer {
 }
 
 .main-logo {
-    width: 100%;
-    max-width: 500px;
+    width: 75%;
+    max-width: 75%;
     height: auto;
     opacity: 0.3; 
     filter: grayscale(20%);

@@ -23,6 +23,10 @@ public class ComplaintService {
     public List<Complaint> getAllComplaints() {
         return repository.findAll();
     }
+    public Complaint getById(Long id) {
+    return repository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Complaint not found: " + id));
+}
 
     public Complaint getComplaintById(Long id) {
         return repository.findById(id)

@@ -36,25 +36,16 @@ async function loadBarangay() {
   try {
     const res = await fetch("http://localhost:8080/api/documents/barangay-id");
     const data = await res.json();
-    renderBarangay(data);
-  } catch (err) {
-    showError("Failed to load Barangay ID requests.");
-  }async function loadBarangay() {
-  try {
-    const res = await fetch("http://localhost:8080/api/documents/barangay-id");
-    const data = await res.json();
 
-    console.log("RAW RESPONSE:", data);  // <-- paste what this shows
+    console.log("RAW RESPONSE:", data);
 
-    // Handle if backend wraps data in an object
-    const list = Array.isArray(data) ? data : data.content ?? data.data ?? [];
+    const list = Array.isArray(data) ? data : [];
 
     renderBarangay(list);
   } catch (err) {
     showError("Failed to load Barangay ID requests.");
     console.error(err);
   }
-}
 }
 
 async function loadCedula() {
@@ -184,7 +175,7 @@ async function openModal(type, id) {
 
   try {
     if (type === "BARANGAY_ID") {
-      const res = await fetch(`http://localhost:8080/api/barangay-id/${id}`);
+      const res = await fetch(`http://localhost:8080/api/documents/barangay-id/${id}`);
       req = await res.json();
     } else if (type === "CEDULA") {
       const res = await fetch(`http://localhost:8080/api/cedulas/${id}`);

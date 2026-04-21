@@ -22,5 +22,12 @@ public class cedulaservice {
     public List<cedula> getAllCedula() {
         return repository.findAll();
     }
+    public List<cedula> getAll() {
+    return repository.findAll();
+}
+    public cedula getById(Long id) {
+    return repository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Cedula not found: " + id));
+}
 }
 

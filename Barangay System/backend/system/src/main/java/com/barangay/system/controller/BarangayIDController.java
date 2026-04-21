@@ -16,7 +16,7 @@ import com.barangay.system.model.BarangayID;
 import com.barangay.system.service.BarangayIDService;
 
 @RestController
-@RequestMapping("/api/documents")
+@RequestMapping("/api/barangay-id")
 @CrossOrigin(origins = "*")
 public class BarangayIDController {
 
@@ -26,13 +26,11 @@ public class BarangayIDController {
         this.barangayIDService = barangayIDService;
     }
 
-    // SUBMIT REQUEST
+    // ==========================
+    // SUBMIT
+    // ==========================
     @PostMapping("/submit")
     public BarangayID submit(@RequestBody BarangayID request) {
-
-        System.out.println("🔥 SUBMIT RECEIVED");
-        System.out.println("LNAME: " + request.getLname());
-        System.out.println("USERID: " + request.getUserId());
 
         request.setStatus("PENDING");
         request.setSubmittedAt(LocalDateTime.now());
@@ -40,13 +38,23 @@ public class BarangayIDController {
         return barangayIDService.saveBarangayID(request);
     }
 
-    // GET ALL REQUESTS
+
     @GetMapping("/barangay-id")
     public List<BarangayID> getAll() {
-        return barangayIDService.getAllBarangayIDs();
+    return barangayIDService.getAllBarangayIDs();
+}
+
+    // ==========================
+    // GET BY ID
+    // ==========================
+    @GetMapping("/barangay-id/{id}")
+    public BarangayID getById(@PathVariable Long id) {
+        return barangayIDService.getById(id);
     }
 
-    // APPROVE REQUEST
+    // ==========================
+    // APPROVE
+    // ==========================
     @PutMapping("/approve/{id}")
     public BarangayID approve(@PathVariable Long id) {
         BarangayID req = barangayIDService.getById(id);
@@ -54,7 +62,9 @@ public class BarangayIDController {
         return barangayIDService.saveBarangayID(req);
     }
 
-    // REJECT REQUEST
+    // ==========================
+    // REJECT
+    // ==========================
     @PutMapping("/reject/{id}")
     public BarangayID reject(@PathVariable Long id) {
         BarangayID req = barangayIDService.getById(id);
@@ -62,8 +72,11 @@ public class BarangayIDController {
         return barangayIDService.saveBarangayID(req);
     }
 
+    // ==========================
+    // USER REQUESTS
+    // ==========================
     @GetMapping("/user/{userId}")
-        public List<BarangayID> getUserRequests(@PathVariable Long userId) {
+    public List<BarangayID> getUserRequests(@PathVariable Long userId) {
         return barangayIDService.getByUserId(userId);
-}
+    }
 }

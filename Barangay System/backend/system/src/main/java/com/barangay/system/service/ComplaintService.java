@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.barangay.system.model.Complaint;
 import com.barangay.system.repository.ComplaintRepository;
 
+
 @Service
 public class ComplaintService {
 
@@ -27,6 +28,10 @@ public class ComplaintService {
     return repository.findById(id)
         .orElseThrow(() -> new RuntimeException("Complaint not found: " + id));
 }
+    public List<Complaint> getByUserId(Long userId) {
+    return repository.findByUserId(userId);
+}
+
 
     public Complaint getComplaintById(Long id) {
         return repository.findById(id)

@@ -15,7 +15,18 @@ public class Complaint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    // Add these fields after the existing ones 
     private Long id;
+    
+    private Long userId;
+    private String status;
+    private LocalDateTime submittedAt;
+   
+
+    // Complainant name (needed for the status table display)
+    private String fname;
+    private String lname;
 
     @Column(name = "incident_type", nullable = false)
     private String incidentType;
@@ -69,4 +80,44 @@ public class Complaint {
 
     public String getNarrative() { return narrative; }
     public void setNarrative(String narrative) { this.narrative = narrative; }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getSubmittedAt() {
+        return submittedAt;
+    }
+
+    public void setSubmittedAt(LocalDateTime submittedAt) {
+        this.submittedAt = submittedAt;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
 }

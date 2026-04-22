@@ -1,6 +1,7 @@
 package com.barangay.system.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +22,8 @@ public class BusinessPermit {
     private String lastName;
     private String firstName;
     private String middleName;
+    private Long userId;
+    private String status;
 
     private String businessName;
     private String tin;
@@ -45,17 +48,18 @@ public class BusinessPermit {
     private Integer calendarYear;
     private LocalDate assessmentDate;
     private String permitNumber;
+    private LocalDateTime submittedAt;
+
+    public LocalDateTime getSubmittedAt() {
+        return submittedAt;
+    }
+
+    public void setSubmittedAt(LocalDateTime submittedAt) {
+        this.submittedAt = submittedAt;
+    }
 
     @Column(columnDefinition = "TEXT")
     private String capitalBreakdown;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getLastName() {
         return lastName;
@@ -215,6 +219,30 @@ public class BusinessPermit {
 
     public void setCapitalBreakdown(String capitalBreakdown) {
         this.capitalBreakdown = capitalBreakdown;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

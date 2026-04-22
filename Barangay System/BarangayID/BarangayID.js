@@ -1,6 +1,11 @@
 function submitForm() {
 
   const user = JSON.parse(localStorage.getItem("user"));
+  
+  if (!user || !user.userId) {
+    alert("You must be logged in to submit this form.");
+    return;
+  }
 
   const yearsValue = document.getElementById("yearsOfStay").value;
 
@@ -33,8 +38,8 @@ function submitForm() {
     documentType: "BARANGAY_ID"
   };
 
-  fetch("http://localhost:8080/api/documents/submit", {
-    method: "POST",
+  fetch("http://localhost:8080/api/barangay-id", {
+  method: "POST",
     headers: {
       "Content-Type": "application/json"
     },

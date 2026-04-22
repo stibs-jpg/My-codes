@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     applyBtn.addEventListener("click", async () => {
 
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user || !user.userId) {
+            alert("You must be logged in to submit.");
+            return;
+        }
+
         // Determine ownership type (pick one)
         let ownershipType = "";
         if (document.getElementById("singleProprietor").checked) ownershipType = "Single Proprietor";
@@ -44,7 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
             calendarYear: document.getElementById("calendarYear").value || null,
             assessmentDate: document.getElementById("assessmentDate").value || null,
             permitNumber: document.getElementById("permitNumber").value,
-            capitalBreakdown: document.getElementById("capital").value
+            capitalBreakdown: document.getElementById("capital").value,
+            userId: user.userId
         };
 
         console.log("Sending data:", data); // debug

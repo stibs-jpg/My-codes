@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-BARANGAY WEB PLATFORM</title>
+    <link rel="stylesheet" href="BarangayID.css">
+    <script src="BarangayID.js" defer></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo-container">
+        <img src="../HomePage/Images/LOGO.png" alt="Barangay Logo" class="logo-img">
+        <div class="logo-text">
+            <h1>E-BARANGAY WEB PLATFORM<br> BARANGAY ID REGISTRATION</h1>
+        </div>
+    </div>
+    <nav>
+        <a href="../HomePage/Prac.html">Home</a>
+        <a href="#" class="active">Applications</a>
+        <a href="../HomePage/StatusRequest/Status.html">Request Status</a>
+        <a href="../Announcement/Announcement.html">Announcements</a>
+        <a href="../BarangayLogin/Login.html">Logout</a>
+    </nav>
+</header>
+
+<!-- MAIN -->
+<main>
+
+    <!-- LEFT PANEL -->
+    <section class="left-panel">
+        <label>Date of Application</label>
+        <input type="date" id="applicationDate">
+
+        <label>Sex</label>
+        <div class="group">
+            <label><input type="radio" name="sex" value="Male"> Male</label>
+            <label><input type="radio" name="sex" value="Female"> Female</label>
+        </div>
+
+        <label>Civil Status</label>
+        <div class="group">
+            <label><input type="radio" name="civil" value="Single"> Single</label>
+            <label><input type="radio" name="civil" value="Married"> Married</label>
+            <label><input type="radio" name="civil" value="Widowed"> Widowed</label>
+        </div>
+
+        <button class="primary-btn" onclick="submitForm()">Register</button>
+    </section>
+
+    <!-- CENTER PANEL -->
+    <section class="center-panel_form-panel">
+        <h1>BARANGAY SAN ISIDRO</h1>
+        <h3>Application For Barangay ID</h3>
+
+        <div class="form-card">
+            <input type="text" placeholder="Last Name" id="lname">
+            <input type="text" placeholder="First Name" id="fname">
+            <input type="text" placeholder="Middle Name" id="mname">
+
+            <input type="text" placeholder="Address" id="address">
+
+            <div class="row">
+                <div class="inline-field">
+                    <label>Date of Birth</label>
+                    <input type="date" id="birthday">
+                </div>
+                <div class="inline-field">
+                    <label>Contact No.</label>
+                    <input type="text" id="contact">
+                </div>
+            </div>
+
+            <div class="residency-row">
+                <label class="main-label">Nature of Residency:</label>
+                <label><input type="radio" name="res" value="Homeowner"> Homeowner</label>
+                <label><input type="radio" name="res" value="Renting"> Renting</label>
+                <label><input type="radio" name="res" value="RFO"> RFO</label>
+
+                <label class="years-label">Years of Stay:</label>
+                <input type="number" class="years-input" id="yearsOfStay">
+            </div>
+
+            <div class="Emergency">
+                <h4>Emergency Contact</h4>
+            </div>
+            <input type="text" placeholder="Name" id="emergencyName">
+
+            <div class="row">
+                <input type="text" placeholder="Contact No." id="emergencyContact">
+                <input type="text" placeholder="Relationship" id="emergencyRelationship">
+            </div>
+
+            <input type="text" placeholder="Address" id="emergencyAddress">
+        </div>
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <section class="right-panel">
+        <div class="box">
+            <h3>ID Details</h3>
+            <input type="text" placeholder="ID Number" id="idNumber">
+            <input type="text" placeholder="Precinct Number" id="precinctNumber">
+            <textarea placeholder="Remarks" id="remarks"></textarea>
+            <input type="text" placeholder="O.R Number" id="orNumber">
+            <div class="Signature">
+                <h1>Signature</h1>
+                <input type="file" id="signature">
+            </div>   
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Barangay San Isidro | Powered by FEU Roosevelt IT Students</p>
+</footer>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+</body>
+</html>

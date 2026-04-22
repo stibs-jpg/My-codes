@@ -34,17 +34,21 @@ function setupSidebar() {
 // ==========================
 async function loadBarangay() {
   try {
-    const res = await fetch("http://localhost:8080/api/documents/barangay-id");
+    const res = await fetch("http://localhost:8080/api/barangay-id")
+
+    if (!res.ok) {
+      throw new Error("HTTP error " + res.status);
+    }
+
     const data = await res.json();
 
-    console.log("RAW RESPONSE:", data);
+    console.log("Barangay data:", data);
 
-    const list = Array.isArray(data) ? data : [];
+    renderBarangay(data);
 
-    renderBarangay(list);
   } catch (err) {
-    showError("Failed to load Barangay ID requests.");
     console.error(err);
+    showError("Failed to load Barangay ID requests.");
   }
 }
 
@@ -70,7 +74,7 @@ async function loadBusiness() {
 
 async function loadComplaints() {
   try {
-    const res = await fetch("http://localhost:8080/api/staff/all-requests");
+    const res = await fetch("http://localhost:8080/api/complaints");
     const data = await res.json();
     renderComplaints(data.filter(r => r.type === "COMPLAINT"));
   } catch (err) {
@@ -175,7 +179,7 @@ async function openModal(type, id) {
 
   try {
     if (type === "BARANGAY_ID") {
-      const res = await fetch(`http://localhost:8080/api/documents/barangay-id/${id}`);
+      const res = await fetch(`http://localhost:8080/api/barangay-id/${id}`)
       req = await res.json();
     } else if (type === "CEDULA") {
       const res = await fetch(`http://localhost:8080/api/cedulas/${id}`);
@@ -306,22 +310,41 @@ function closeModal() {
 // ==========================
 async function approve(id) {
   try {
-    await fetch(`http://localhost:8080/api/documents/approve/${id}`, { method: "PUT" });
+    const url = getApproveUrl(id, "approve");
+    if (!url) return;
+    const res = await fetch(url, { method: "PUT" });
+    if (!res.ok) throw new Error("Approve failed");
+    alert("Request approved!");
     closeModal();
     reloadCurrentTab();
   } catch (err) {
     console.error("Approve failed:", err);
+    alert("Failed to approve request.");
   }
 }
 
 async function reject(id) {
   try {
-    await fetch(`http://localhost:8080/api/documents/reject/${id}`, { method: "PUT" });
+    const url = getApproveUrl(id, "reject");
+    if (!url) return;
+    const res = await fetch(url, { method: "PUT" });
+    if (!res.ok) throw new Error("Reject failed");
+    alert("Request rejected!");
     closeModal();
     reloadCurrentTab();
   } catch (err) {
     console.error("Reject failed:", err);
+    alert("Failed to reject request.");
   }
+}
+
+function getApproveUrl(id, action) {
+  if (currentType === "BARANGAY_ID")  return `http://localhost:8080/api/barangay-id/${action}/${id}`;
+  if (currentType === "CEDULA")       return `http://localhost:8080/api/cedulas/${action}/${id}`;
+  if (currentType === "BUSINESS")     return `http://localhost:8080/api/business-permits/${action}/${id}`;
+  if (currentType === "COMPLAINT")    return `http://localhost:8080/api/complaints/${action}/${id}`;
+  console.error("Unknown currentType:", currentType);
+  return null;
 }
 
 // ==========================

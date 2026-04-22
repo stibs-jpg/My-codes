@@ -1,0 +1,251 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    opacity: 0;
+    animation: pageFade 0.5s ease forwards;
+}
+
+@keyframes pageFade {
+    to {
+        opacity: 1;
+    }
+}
+
+.top-banner {
+    background-color: #38761d;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-text .title {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.header-text .subtitle {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.signup { 
+    margin-left: auto; 
+}
+
+.signup-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    padding-left: 400px;
+    transition: all 0.2s ease;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+    transform: translateY(-2px);
+}
+
+.signup-link:active {
+    transform: scale(0.97);
+}
+
+.mini-logo {
+    height: 35px;
+    filter: brightness(1.2);
+}
+.main-logo {
+    max-width: 75%;
+    max-height: 75%;
+}
+.container {
+    flex: 1;
+    display: flex;
+}
+
+.left-pane {
+    flex: 1;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    animation: slideLeft 0.6s ease;
+}
+
+.right-pane {
+    flex: 1;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    animation: slideRight 0.6s ease;
+}
+
+@keyframes slideLeft {
+    from {
+        transform: translateX(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.login-card {
+    background: white;
+    width: 380px;
+    padding: 40px;
+    border-radius: 25px;
+    border: 1px solid #999;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.1);
+
+    opacity: 0;
+    transform: scale(0.85);
+    animation: popIn 0.5s ease forwards;
+}
+
+@keyframes popIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    transition: all 0.25s ease;
+}
+
+.form-group input:focus {
+    border-color: #38761d;
+    box-shadow: 0 0 6px rgba(56,118,29,0.4);
+    outline: none;
+    background: #fff;
+}
+
+.captcha-container {
+    margin: 20px 0;
+}
+
+.captcha-box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    background: #fafafa;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #38761d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+
+    transition: all 0.25s ease;
+}
+
+.login-btn:hover {
+    background-color: #2d5e17;
+    transform: translateY(-2px);
+}
+
+.login-btn:active {
+    transform: scale(0.97);
+}
+
+.footer-banner {
+    justify-content: space-between;
+    font-size: 0.85rem;
+
+    animation: footerFade 0.6s ease;
+}
+
+@keyframes footerFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-mini-logo {
+    height: 20px;
+}
+
+.footer-icons {
+    display: flex;
+    gap: 15px;
+}

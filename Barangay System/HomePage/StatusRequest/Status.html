@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barangay San Isidro - Request Status</title>
     <link rel="stylesheet" href="Status.css">
-    <script src="Status.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -23,21 +22,25 @@
             </div>
 
             <nav class="nav-menu">
-                <div class="nav-item active">
+                <div class="nav-item active" data-type="ALL">
+                    <span>All Requests</span>
+                    <span class="badge" id="badge-ALL">0</span>
+                </div>
+                <div class="nav-item" data-type="BARANGAY_ID">
                     <span>Barangay ID</span>
-                    <span class="badge">0</span>
+                    <span class="badge" id="badge-BARANGAY_ID">0</span>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" data-type="CEDULA">
                     <span>Cedula</span>
-                    <span class="badge">0</span>
+                    <span class="badge" id="badge-CEDULA">0</span>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" data-type="COMPLAINT">
                     <span>Complaints</span>
-                    <span class="badge">0</span>
+                    <span class="badge" id="badge-COMPLAINT">0</span>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" data-type="BUSINESS_PERMIT">
                     <span>Business Permit</span>
-                    <span class="badge">0</span>
+                    <span class="badge" id="badge-BUSINESS_PERMIT">0</span>
                 </div>
             </nav>
         </aside>
@@ -47,46 +50,40 @@
                 <h2>REQUEST STATUS OVERVIEW</h2>
             </header>
 
-            <!-- STATS -->
             <div class="stats-container">
                 <div class="stat-card">
                     <p>Pending Request</p>
                     <div class="stat-value text-pending">
-                        <i class="fa-regular fa-clock"></i> 0
+                        <i class="fa-regular fa-clock"></i>
+                        <span id="stat-pending">0</span>
                     </div>
                     <p class="sub-label">Request Pending</p>
                 </div>
-
                 <div class="stat-card">
                     <p>Approved Request</p>
                     <div class="stat-value text-approved">
-                        <i class="fa-regular fa-circle-check"></i> 0
+                        <i class="fa-regular fa-circle-check"></i>
+                        <span id="stat-approved">0</span>
                     </div>
                     <p class="sub-label">Request Approved</p>
                 </div>
-
                 <div class="stat-card">
                     <p>Reject Request</p>
                     <div class="stat-value text-reject">
-                        <i class="fa-regular fa-circle-xmark"></i> 0
+                        <i class="fa-regular fa-circle-xmark"></i>
+                        <span id="stat-rejected">0</span>
                     </div>
-                    <p class="sub-label">Request Reject</p>
+                    <p class="sub-label">Request Rejected</p>
                 </div>
             </div>
 
-            <!-- TABLE -->
             <section class="recent-requests">
                 <h3>Recent Requests</h3>
-
-                <div class="request-table" id="requestTable">
-                    <!-- JS will insert rows here -->
-                </div>
+                <div class="request-table" id="requestTable"></div>
             </section>
         </main>
     </div>
 
-    <!-- CONNECT JS -->
     <script src="Status.js"></script>
-
 </body>
 </html>

@@ -23,6 +23,9 @@ public class BusinessPermitService {
     public List<BusinessPermit> getAll() {
         return repository.findAll();
     }
+    public List<BusinessPermit> getByUserId(Long userId) {
+    return repository.findByUserId(userId);
+}
 
     public BusinessPermit getById(Long id) {
         return repository.findById(id)

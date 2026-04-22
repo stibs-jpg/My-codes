@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay Reports and Complaints</title>
+    <link rel="stylesheet" href="BarangayComplaint.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo-title">
+        <img src="/Barangay System/HomePage/Images/LOGO.png" alt="Logo">
+        <h2>E-BARANGAY WEB PLATFORM<br>REPORTS & COMPLAINTS</h2>
+    </div>
+
+    <nav>
+        <a href="../HomePage/Prac.html">HOME</a>
+        <a href="#">APPLICATIONS</a>
+        <a href="../Homepage/StatusRequest/Status.html">REQUEST STATUS</a>
+        <a href="../Announcement/Announcement.html">ANNOUNCEMENTS</a>
+        <a href="../BarangayLogin/Login.html">LOGOUT</a>
+    </nav>
+</header>
+
+<!-- MAIN -->
+<div class="container">
+
+    <!-- LEFT TEXT -->
+    <div class="info">
+        <p>
+            The barangay reports and complaints form logs incidents and disputes at the Philippine barangay level for mediation via Katarungang Pambarangay.
+        </p>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-container">
+        <h2>BARANGAY SAN ISIDRO</h2>
+        <p>Report and Complaint Online Form</p>
+
+        <form id="reportForm">
+
+    <label>TYPE OF INCIDENT</label>
+    <input type="text" id="incidentType" required>
+
+    <label>INCLUSIVE DATES AND TIME OF INCIDENT</label>
+    <input type="datetime-local" id="incidentStart" required>
+
+    <label>END DATE & TIME (Optional)</label>
+    <input type="datetime-local" id="incidentEnd">
+
+    <label>EXACT LOCATION OF INCIDENT</label>
+    <input type="text" id="location" required>
+
+    <label>INVOLVED PERSONS / SPECIFIC IDENTIFICATION</label>
+    <input type="text" id="involvedPersons" required>
+
+    <label>NARRATIVE DETAILS OF INCIDENT</label>
+    <textarea id="narrative" rows="4" required></textarea>
+
+    <button type="submit">Report</button>
+</form>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="assisted">
+        <p>ASSISTED BY:</p>
+        <img src="/Barangay System/HomePage/Images/roosevelt logo practice.png" alt="Logo">
+        <img src="/Barangay System/HomePage/Images/PNP logo.png" alt="PNP Logo">
+        <img src="/Barangay System/HomePage/Images/roosevelt logo practice.png" alt="Logo">
+        <img src="/Barangay System/HomePage/Images/roosevelt logo practice.png" alt="Logo">
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Barangay San Isidro, Marikina City</p>
+</footer>
+
+<script src="BarangayComplaint.js"></script>
+</body>
+</html>

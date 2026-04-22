@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay San Isidro Online Services</title>
+    <link rel="stylesheet" href="static/Prac.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo-container">
+        <img src="Images/roosevelt logo practice.png" alt="Barangay Logo" class="logo-img">
+        <div class="logo-text">
+            <h1>BARANGAY SAN ISIDRO<br> ONLINE APPLICATIONS</h1>
+        </div>
+    </div>
+    <nav>
+        <a href="#"class="active">Home</a>
+        <a href="#">Applications</a>
+        <a href="/Barangay System/HomePage/StatusRequest/Status.html">Request Status</a>
+        <a href="/Barangay System/Announcement/Announcement.html" class="active">Announcements</a>
+        <a href="#">Contact</a>
+        <a href="/Barangay System/BarangayLogin/Login.html">Logout</a>
+    </nav>
+</header>
+
+<!-- MAIN -->
+<main>
+
+    <!-- LEFT INFO -->
+    <section class="left-panel">
+        <p>
+            A Barangay Services
+Online Application is a
+digital system that allows
+residents to request
+barangay documents and
+services through the
+internet. People can
+apply for services like
+barangay clearance,
+certificate of residency,
+and barangay ID without
+going to the barangay
+hall. This system makes
+the process faster, more
+organized, and
+convenient for both
+residents and barangay
+officials.
+        </p>
+        <button class="primary-btn">Register Now &#10132;</button>
+    </section>
+
+    <!-- CENTER CONTENT -->
+    <section class="center-panel">
+        <h1>SAN ISIDRO ONLINE SERVICES</h1>
+        <h3>Fast, Easy, Accessible.</h3>
+
+        <div class="cards">
+            <div class="card">
+                <img src="Images/roosevelt logo practice.png" alt="San Isidro Logo">
+                <h4>BUSINESS PERMIT APPLICATIONS</h4>
+                <button>Apply Now</button>
+            </div>
+
+            <div class="card">
+                <img src="Images/CERT IMAGE.jpg" alt="Cert Image">
+                <h4>CLEARANCES & CERTIFICATIONS</h4>
+                <button onclick="location.href='../BarangayClearance/BarangayClearance.html'">Apply Now</button>
+            </div>
+
+            <div class="card">
+                <img src="Images/ID.png" alt="ID Image">
+                <h4>BARANGAY ID REGISTRATION</h4>
+                <button onclick="location.href='../BarangayID/BarangayID.html'">Register Now</button>
+            </div>
+
+            <div class="card">
+                <img src="Images/Reports Logo.png" alt="">
+                <h4>REPORTS & COMPLAINTS</h4>
+                <button onclick="location.href='../BarangayComplaint/BarangayComplaint.html'">Submit</button>
+            </div>
+        </div>
+
+        <!-- HOW IT WORKS -->
+         <div class="how-it-works-card">
+    <h3 class="steps-title">HOW IT WORKS</h3>
+        <div class="steps">
+    <div class="step">
+        <img src="Images/Create Account Logo.png">
+        <p>CREATE ACCOUNT</p>
+    </div>
+
+    <span class="arrow">→</span>
+
+    <div class="step">
+        <img src="Images/Fill Up Forms Logo.jpg">
+        <p>FILL FORMS & ATTACH DOCUMENTS</p>
+    </div>
+
+    <span class="arrow">→</span>
+
+    <div class="step">
+        <img src="Images/Delivery Logo.png">
+        <p>TRACK REQUEST</p>
+    </div>
+</div>
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <section class="right-panel">
+        <div class="box">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Download Forms</li>
+                <li>FAQs</li>
+                <li>Citizen Charter</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>Latest Announcements</h3>
+            <div id="announcements"></div>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Barangay San Isidro | Powered by FEU Roosevelt IT Students</p>
+</footer>
+
+<script src="Prac.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+</body>
+</html>

@@ -26,35 +26,31 @@ public class BarangayIDController {
         this.barangayIDService = barangayIDService;
     }
 
-    // ==========================
     // SUBMIT
-    // ==========================
-    @PostMapping("/submit")
+    @PostMapping
     public BarangayID submit(@RequestBody BarangayID request) {
-
         request.setStatus("PENDING");
         request.setSubmittedAt(LocalDateTime.now());
-
         return barangayIDService.saveBarangayID(request);
     }
 
-
-    @GetMapping("/barangay-id")
+    // GET ALL
+    @GetMapping
     public List<BarangayID> getAll() {
-    return barangayIDService.getAllBarangayIDs();
-}
+        return barangayIDService.getAllBarangayIDs();
+    }
 
-    // ==========================
     // GET BY ID
-    // ==========================
-    @GetMapping("/barangay-id/{id}")
+    @GetMapping("/{id}")
     public BarangayID getById(@PathVariable Long id) {
         return barangayIDService.getById(id);
     }
+    @GetMapping("/user/{userId}")
+    public List<BarangayID> getByUserId(@PathVariable Long userId) {
+    return barangayIDService.getByUserId(userId);
+}
 
-    // ==========================
     // APPROVE
-    // ==========================
     @PutMapping("/approve/{id}")
     public BarangayID approve(@PathVariable Long id) {
         BarangayID req = barangayIDService.getById(id);
@@ -62,21 +58,11 @@ public class BarangayIDController {
         return barangayIDService.saveBarangayID(req);
     }
 
-    // ==========================
     // REJECT
-    // ==========================
     @PutMapping("/reject/{id}")
     public BarangayID reject(@PathVariable Long id) {
         BarangayID req = barangayIDService.getById(id);
         req.setStatus("REJECTED");
         return barangayIDService.saveBarangayID(req);
-    }
-
-    // ==========================
-    // USER REQUESTS
-    // ==========================
-    @GetMapping("/user/{userId}")
-    public List<BarangayID> getUserRequests(@PathVariable Long userId) {
-        return barangayIDService.getByUserId(userId);
     }
 }

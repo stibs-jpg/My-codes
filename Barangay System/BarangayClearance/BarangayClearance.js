@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             return el.value.trim();
         }
+           //  Get logged in user
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user || !user.userId) {
+            alert("You must be logged in to submit.");
+            return;
+        }
 
         const data = {
             lname: getValue("lname"),
@@ -30,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
             bday: getValue("bday"),
             birthplace: getValue("birthplace"),
             occupation: getValue("occupation"),
-            annualIncome: getValue("annualincome")
+            annualIncome: getValue("annualincome"),
+            userId: user.userId
         };
 
         //Basic validation
@@ -39,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch("http://localhost:8080/api/cedula", {
+        fetch("http://localhost:8080/api/cedulas", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

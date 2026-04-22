@@ -1,49 +1,82 @@
+let allRequests = [];
+
 document.addEventListener("DOMContentLoaded", () => {
   loadMyRequests();
+  setupSidebarNav();
 });
 
-// ==========================
-// LOAD USER REQUESTS ONLY
-// ==========================
 async function loadMyRequests() {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  console.log("LOGGED USER:", user);
+  console.log("FULL USER OBJECT:", user);
 
   if (!user || !user.userId) {
-    console.error("No user logged in or missing userId");
-    document.querySelector(".request-table").innerHTML =
+    document.getElementById("requestTable").innerHTML =
       "<p>Please log in to view your requests.</p>";
     return;
   }
 
+  const userId = user.userId;
+
   try {
-    const response = await fetch(
-      `http://localhost:8080/api/documents/user/${user.userId}`
-    );
+    const [barangayRes, cedulaRes, complaintsRes, businessRes] = await Promise.allSettled([
+  fetch(`http://localhost:8080/api/barangay-id/user/${userId}`).then(r => r.json()),
+  fetch(`http://localhost:8080/api/cedulas/user/${userId}`).then(r => r.json()),    
+  fetch(`http://localhost:8080/api/complaints/user/${userId}`).then(r => r.json()),      
+  fetch(`http://localhost:8080/api/business-permits/user/${userId}`).then(r => r.json()) 
+]);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch requests");
-    }
+allRequests = [
+  ...formatRequests(barangayRes.value,   "BARANGAY_ID"),
+  ...formatRequests(cedulaRes.value,     "CEDULA"),
+  ...formatRequests(complaintsRes.value, "COMPLAINT"),
+  ...formatRequests(businessRes.value,   "BUSINESS_PERMIT"),
+];
 
-    const data = await response.json();
-    console.log("REQUEST DATA:", data);
+    console.log("ALL MERGED REQUESTS:", allRequests);
 
-    renderRequests(data);
-    updateStats(data);
+    renderRequests(allRequests);
+    updateStats(allRequests);
+    updateSidebarBadges(allRequests);
 
   } catch (error) {
     console.error("ERROR:", error);
-    document.querySelector(".request-table").innerHTML =
-      "<p>Error loading your requests.</p>";
+    document.getElementById("requestTable").innerHTML =
+      "<p>Error loading requests. Please try again.</p>";
   }
 }
 
-// ==========================
-// RENDER REQUEST TABLE
-// ==========================
+// Normalize each type into a common shape matching your entity field names
+function formatRequests(data, type) {
+  if (!data || !Array.isArray(data)) return [];
+  return data.map(req => ({
+    fname: req.fname,
+    lname: req.lname,
+    status: req.status,
+    submittedAt: req.submittedAt,
+    documentType: type,
+  }));
+}
+
+function setupSidebarNav() {
+  const navItems = document.querySelectorAll(".nav-item");
+  navItems.forEach(item => {
+    item.addEventListener("click", () => {
+      navItems.forEach(n => n.classList.remove("active"));
+      item.classList.add("active");
+
+      const type = item.getAttribute("data-type");
+      const filtered = type === "ALL"
+        ? allRequests
+        : allRequests.filter(req => req.documentType === type);
+
+      renderRequests(filtered);
+    });
+  });
+}
+
 function renderRequests(requests) {
-  const container = document.querySelector(".request-table");
+  const container = document.getElementById("requestTable");
 
   if (!requests || requests.length === 0) {
     container.innerHTML = "<p>No requests found.</p>";
@@ -52,72 +85,57 @@ function renderRequests(requests) {
 
   container.innerHTML = `
     <div class="table-header">
-      <div>Name / Request</div>
+      <div>Name</div>
+      <div>Document Type</div>
       <div>Date Submitted</div>
       <div>Status</div>
     </div>
   ` + requests.map(req => `
     <div class="table-row">
-      <div>${req.fname} ${req.lname} - Barangay ID</div>
+      <div>${req.fname || ""} ${req.lname || ""}</div>
+      <div>${formatDocType(req.documentType)}</div>
       <div>${formatDate(req.submittedAt)}</div>
-      <div>
-        <span class="tag ${getTagClass(req.status)}">
-          ${req.status || "PENDING"}
-        </span>
-      </div>
+      <div><span class="tag ${getTagClass(req.status)}">${req.status || "PENDING"}</span></div>
     </div>
   `).join("");
 }
 
-// ==========================
-// UPDATE STATS (optional but useful)
-// ==========================
 function updateStats(requests) {
-  let pending = 0;
-  let approved = 0;
-  let rejected = 0;
-
+  let pending = 0, approved = 0, rejected = 0;
   requests.forEach(req => {
-    if (req.status === "APPROVED") approved++;
-    else if (req.status === "REJECTED") rejected++;
+    const s = (req.status || "").toUpperCase();
+    if (s === "APPROVED") approved++;
+    else if (s === "REJECTED") rejected++;
     else pending++;
   });
-
-  document.querySelector(".stats-container").innerHTML = `
-    <div class="stat-card">
-      <p>Pending Requests</p>
-      <div class="stat-value text-pending">${pending}</div>
-    </div>
-
-    <div class="stat-card">
-      <p>Approved Requests</p>
-      <div class="stat-value text-approved">${approved}</div>
-    </div>
-
-    <div class="stat-card">
-      <p>Rejected Requests</p>
-      <div class="stat-value text-reject">${rejected}</div>
-    </div>
-  `;
+  document.getElementById("stat-pending").textContent = pending;
+  document.getElementById("stat-approved").textContent = approved;
+  document.getElementById("stat-rejected").textContent = rejected;
 }
 
-// ==========================
-// STATUS STYLING
-// ==========================
+function updateSidebarBadges(requests) {
+  const counts = { ALL: requests.length, BARANGAY_ID: 0, CEDULA: 0, COMPLAINT: 0, BUSINESS_PERMIT: 0 };
+  requests.forEach(req => {
+    if (counts[req.documentType] !== undefined) counts[req.documentType]++;
+  });
+  Object.keys(counts).forEach(type => {
+    const badge = document.getElementById(`badge-${type}`);
+    if (badge) badge.textContent = counts[type];
+  });
+}
+
 function getTagClass(status) {
-  if (status === "APPROVED") return "tag-approved";
-  if (status === "REJECTED") return "tag-reject";
+  if ((status || "").toUpperCase() === "APPROVED") return "tag-approved";
+  if ((status || "").toUpperCase() === "REJECTED") return "tag-reject";
   return "tag-pending";
 }
 
-// ==========================
-// DATE FORMAT
-// ==========================
 function formatDate(date) {
   if (!date) return "N/A";
-  return new Date(date).toLocaleDateString("en-PH", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
+  return new Date(date).toLocaleDateString("en-PH", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function formatDocType(type) {
+  const map = { BARANGAY_ID: "Barangay ID", CEDULA: "Cedula", COMPLAINT: "Complaint", BUSINESS_PERMIT: "Business Permit" };
+  return map[type] || type || "Unknown";
 }

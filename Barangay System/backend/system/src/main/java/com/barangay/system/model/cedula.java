@@ -18,6 +18,8 @@ public class cedula {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long userId;
+    private String status;
 
     private String lname;
     private String fname;
@@ -34,10 +36,12 @@ public class cedula {
     private Double annualIncome;
 
     private LocalDateTime createdAt;
+    private LocalDateTime submittedAt;
 
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+        submittedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -135,4 +139,23 @@ public class cedula {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getSubmittedAt() { return submittedAt; }
+    public void setSubmittedAt(LocalDateTime submittedAt) { this.submittedAt = submittedAt; }
 }

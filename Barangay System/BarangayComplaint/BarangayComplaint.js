@@ -5,6 +5,13 @@ const API_URL = "http://localhost:8080/api/complaints";
 document.getElementById("reportForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
+    // Get logged in user
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.userId) {
+        alert("You must be logged in to submit.");
+        return;
+    }
+
     // Get values from form
     const complaint = {
         incidentType: document.getElementById("incidentType").value,
@@ -12,7 +19,10 @@ document.getElementById("reportForm").addEventListener("submit", async function 
         incidentEnd: document.getElementById("incidentEnd").value || null,
         location: document.getElementById("location").value,
         involvedPersons: document.getElementById("involvedPersons").value,
-        narrative: document.getElementById("narrative").value
+        narrative: document.getElementById("narrative").value,
+        userId: user.userId,   
+        fname: user.fname,     
+        lname: user.lname 
     };
 
     console.log("Sending:", complaint);
